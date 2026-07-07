@@ -65,7 +65,9 @@ run_analysis = st.button(
     use_container_width=True)
 
 scan_placeholder = st.empty()
-
+ # Setup real-time crawler logs
+crawl_count_placeholder = st.empty()
+crawl_log_placeholder = st.empty()
 
 # ===================== NEW: HOMEPAGE PREVIEW (ADDED ON FIRST PAGE) ======
 if domains_input.strip():
@@ -169,10 +171,6 @@ if run_analysis:
                 render_scan_progress(scan_placeholder, domain, current_log, p)
                 if sleep_time > 0:
                     time.sleep(sleep_time)
-
-            # Setup real-time crawler logs
-            crawl_count_placeholder = st.empty()
-            crawl_log_placeholder = st.empty()
 
             def make_live_callback():
                 count = [0]
