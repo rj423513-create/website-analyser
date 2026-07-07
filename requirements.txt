@@ -1,0 +1,10 @@
+pandas
+openpyxl
+python-whois
+dnspython
+requests
+beautifulsoup4
+python-dotenv
+tqdm
+streamlit
+python-dateutil
