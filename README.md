@@ -101,38 +101,6 @@ The auditor performs multiple checks across every scanned page:
 
 ---
 
-### Step-by-Step Installation
-
-1.  **Clone the Repository:**
-    ```bash
-    git clone https://github.com/your-username/website-analyser.git
-    cd website-analyser
-    ```
-
-2.  **Install Python Dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-3.  **Install Node.js Dependencies (Screenshot Service):**
-    ```bash
-    cd screenshot-service
-    npm install
-    cd ..
-    ```
-
-4.  **Configure Environment Variables:**
-    Duplicate the example configuration file:
-    ```bash
-    cp .env.example .env
-    ```
-    Open `.env` and fill out the parameters:
-    *   `BUILTWITH_API_KEY`: *(Optional)* Your BuiltWith API key.
-    *   `RATE_LIMIT_DELAY`: Seconds to wait between scans (default: `2`).
-    *   `GTMETRIX_API_KEY`: *(Optional)* Your GTmetrix API key (enables premium screenshot preview source).
-
----
-
 ## 🚀 Running the App
 
 Run the startup batch script in your terminal (on Windows):
