@@ -65,6 +65,9 @@ run_analysis = st.button(
     use_container_width=True)
 
 scan_placeholder = st.empty()
+crawl_count_placeholder = st.empty()
+crawl_log_placeholder = st.empty()
+
 
 
 # ===================== NEW: HOMEPAGE PREVIEW (ADDED ON FIRST PAGE) ======
@@ -170,9 +173,8 @@ if run_analysis:
                 if sleep_time > 0:
                     time.sleep(sleep_time)
 
-            # Setup real-time crawler logs
-            crawl_count_placeholder = st.empty()
-            crawl_log_placeholder = st.empty()
+            # Setup real-time crawler logs (placeholders are defined at the top above preview)
+
 
             def make_live_callback():
                 count = [0]
