@@ -105,7 +105,7 @@ The auditor performs multiple checks across every scanned page:
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/your-username/website-analyser.git
+    git clone https://github.com/rj423513-create/website-analyser.git
     cd website-analyser
     ```
 
