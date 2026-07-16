@@ -83,29 +83,76 @@ def get_domain_info(domain):
     except BaseException:
         mx_info = "N/A"
 
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    }
     
     # Robust robots.txt check (avoids soft-404s)
-    try:
-        robots_url = f"http://{clean_domain}/robots.txt"
-        resp = requests.get(robots_url, timeout=8, headers=headers, allow_redirects=True)
-        if resp.status_code == 200 and ("user-agent" in resp.text.lower() or "disallow" in resp.text.lower()):
-            robots = "Found"
-        else:
-            robots = "Not Found"
-    except BaseException:
-        robots = "Not Found"
+    robots = "Not Found"
+    robots_candidates = []
+    if domain.startswith("https://"):
+        robots_candidates = [f"https://{clean_domain}/robots.txt", f"http://{clean_domain}/robots.txt"]
+    else:
+        robots_candidates = [f"http://{clean_domain}/robots.txt", f"https://{clean_domain}/robots.txt"]
+
+    robots_txt_content = ""
+    for r_url in robots_candidates:
+        try:
+            resp = None
+            try:
+                resp = requests.get(r_url, timeout=8, headers=headers, allow_redirects=True, verify=True)
+            except requests.exceptions.SSLError:
+                resp = requests.get(r_url, timeout=8, headers=headers, allow_redirects=True, verify=False)
+            
+            if resp and resp.status_code == 200 and ("user-agent" in resp.text.lower() or "disallow" in resp.text.lower()):
+                robots = "Found"
+                robots_txt_content = resp.text
+                break
+        except BaseException:
+            continue
 
     # Robust sitemap.xml check (avoids soft-404s by verifying XML markers)
-    try:
-        sitemap_url = f"http://{clean_domain}/sitemap.xml"
-        resp = requests.get(sitemap_url, timeout=8, headers=headers, allow_redirects=True)
-        if resp.status_code == 200 and ("<urlset" in resp.text or "<sitemapindex" in resp.text or "sitemap" in resp.text.lower()):
-            sitemap = "Found"
-        else:
-            sitemap = "Not Found"
-    except BaseException:
-        sitemap = "Not Found"
+    sitemap = "Not Found"
+    sitemap_candidates = []
+    
+    # Respect input scheme preference
+    if domain.startswith("http://"):
+        sitemap_candidates.append(f"http://{clean_domain}/sitemap.xml")
+        sitemap_candidates.append(f"https://{clean_domain}/sitemap.xml")
+    else:
+        sitemap_candidates.append(f"https://{clean_domain}/sitemap.xml")
+        sitemap_candidates.append(f"http://{clean_domain}/sitemap.xml")
+
+    # If robots.txt had Sitemap directives, prioritize them
+    if robots_txt_content:
+        for line in robots_txt_content.splitlines():
+            line_str = line.strip()
+            if line_str.lower().startswith("sitemap:"):
+                parts = line_str.split(":", 1)
+                if len(parts) > 1:
+                    sitemap_url = parts[1].strip()
+                    if sitemap_url and sitemap_url not in sitemap_candidates:
+                        sitemap_candidates.insert(0, sitemap_url)
+
+    for url in sitemap_candidates:
+        try:
+            resp = None
+            try:
+                resp = requests.get(url, timeout=8, headers=headers, allow_redirects=True, verify=True)
+            except requests.exceptions.SSLError:
+                resp = requests.get(url, timeout=8, headers=headers, allow_redirects=True, verify=False)
+            
+            if resp and resp.status_code == 200:
+                text_lower = resp.text.lower()
+                is_xml = "<urlset" in text_lower or "<sitemapindex" in text_lower or "?xml" in text_lower or "sitemap" in text_lower
+                if is_xml or "xml" in resp.headers.get("Content-Type", "").lower():
+                    # Avoid HTML soft-404s
+                    if "<html" in text_lower and not ("<urlset" in text_lower or "<sitemapindex" in text_lower or "<sitemap" in text_lower):
+                        continue
+                    sitemap = "Found"
+                    break
+        except BaseException:
+            continue
 
     # Verification-backed SSL status check
     ssl_status = "HTTP Only"
