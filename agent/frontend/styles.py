@@ -266,3 +266,18 @@ def inject_premium_styles():
 def inject_header_element():
     st.markdown("<h1 style='font-weight:800; background: linear-gradient(135deg, #22d3ee 0%, #6366f1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 0.5rem; font-size: 3.2rem;'>SEO Domain Intelligence Agent</h1>", unsafe_allow_html=True)
     st.markdown('<p class="subtitle" style="text-align: center; color: #94a3b8; font-size: 1.15rem; margin-bottom: 2rem;">Multi-Website Enterprise SEO Analysis — Powered by Screaming Frog + Semrush + WebPageTest</p>', unsafe_allow_html=True)
+
+def inject_footer_element():
+    st.markdown("""
+    <div style="
+        text-align: center;
+        padding: 2rem 0;
+        margin-top: 3rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        color: #94a3b8;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+    ">
+        © 2026 Chronflow Made By Patel Rudra J. ,All Rights Reserved.
+    </div>
+    """, unsafe_allow_html=True)

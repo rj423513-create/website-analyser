@@ -12,7 +12,7 @@ import base64
 from config import GTMETRIX_API_KEY
 
 # Import Frontend Subpackage Components
-from frontend import inject_premium_styles, inject_header_element
+from frontend import inject_premium_styles, inject_header_element, inject_footer_element
 from frontend import (
     render_scan_progress,
     render_browser_preview,
@@ -304,4 +304,6 @@ if run_analysis:
 
 else:
     render_ready_to_scan()
-# Force cache refresh
+
+# Render footer on all pages
+inject_footer_element()

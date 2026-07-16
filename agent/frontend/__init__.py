@@ -1,4 +1,4 @@
-from .styles import inject_premium_styles, inject_header_element
+from .styles import inject_premium_styles, inject_header_element, inject_footer_element
 from .components import (
     render_scan_progress,
     render_browser_preview,
