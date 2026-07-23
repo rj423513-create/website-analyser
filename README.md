@@ -1,4 +1,4 @@
-# 🌐 Domain Intelligence Agent & SEO Auditor
+#  Domain Intelligence Agent & SEO Auditor
 
 [![Streamlit App](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)](https://streamlit.io/)
 [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
@@ -10,7 +10,7 @@ An enterprise-grade, multi-website SEO Auditor and Domain Intelligence Tool. Thi
 
 ---
 
-## 🚀 Key Features
+##  Key Features
 
 *   **Multi-Domain Crawling:** Audit single or multiple target domains simultaneously.
 *   **Deep SEO Crawler:** Evaluates on-page SEO factors (Titles, Metas, H1, Canonical tags, OpenGraph tags, JSON-LD Schema structure) and calculates internal/external link profiles.
@@ -22,7 +22,7 @@ An enterprise-grade, multi-website SEO Auditor and Domain Intelligence Tool. Thi
 
 ---
 
-## 🎨 Premium UI Aesthetics
+##  Premium UI Aesthetics
 
 The application overrides default Streamlit components with a custom, tailored CSS interface:
 *   **Typography:** The layout uses the premium `Plus Jakarta Sans` Google Font.
@@ -32,7 +32,7 @@ The application overrides default Streamlit components with a custom, tailored C
 
 ---
 
-## 📐 System Architecture
+##  System Architecture
 
 The project consists of two core components working together:
 
@@ -51,7 +51,7 @@ graph TD
 
 ---
 
-## 🛠️ Audit Parameters & Rules
+##  Audit Parameters & Rules
 
 The auditor performs multiple checks across every scanned page:
 
@@ -93,7 +93,7 @@ The auditor performs multiple checks across every scanned page:
 
 ---
 
-## ⚡ Setup & Installation
+##  Setup & Installation
 
 ### Prerequisites
 *   [Python 3.8+](https://www.python.org/downloads/) installed and added to your `PATH`.
@@ -126,14 +126,10 @@ The auditor performs multiple checks across every scanned page:
     ```bash
     cp .env.example .env
     ```
-    Open `.env` and fill out the parameters:
-    *   `BUILTWITH_API_KEY`: *(Optional)* Your BuiltWith API key.
-    *   `RATE_LIMIT_DELAY`: Seconds to wait between scans (default: `2`).
-    *   `GTMETRIX_API_KEY`: *(Optional)* Your GTmetrix API key (enables premium screenshot preview source).
-
+    
 ---
 
-## 🚀 Running the App
+##  Running the App
 
 Run the startup batch script in your terminal (on Windows):
 ```bash
@@ -159,7 +155,7 @@ This script will automate:
 
 ---
 
-## 📊 Exported Report Details
+##  Exported Report Details
 
 The generated download `.xlsx` report contains four specialized tabs:
 1.  **Domain_Info:** Domain Registrar details, expiry status, MX Records, Robots/Sitemap discovery, and overall connection checks.
@@ -169,6 +165,6 @@ The generated download `.xlsx` report contains four specialized tabs:
 
 ---
 
-## 📄 License
+##  License
 
 Distributed under the MIT License. See `LICENSE` (if applicable) or contact repo owners for details.
